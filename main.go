@@ -107,10 +107,8 @@ func main() {
 			inventory = append(inventory, newItem)
 		}
 
-		if n <= 50 {
-			for _, item := range inventory {
-				fmt.Printf(item.Color+"%.12f\t%s\t%s\t\n"+Reset, item.Float, item.Condition, item.Rarity)
-			}
+		for _, item := range inventory {
+			fmt.Printf(item.Color+"%.12f\t%s\t%s\t\n"+Reset, item.Float, item.Condition, item.Rarity)
 		}
 
 		//TODO
