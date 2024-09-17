@@ -1,9 +1,7 @@
 package main
 
 import (
-	"encoding/csv"
 	"fmt"
-	"log"
 	"math/rand"
 	"os"
 	"strconv"
@@ -14,9 +12,7 @@ type Item struct {
 	Condition string
 	Float     float64
 
-	/*
-		Not technically part of the Item struct, it should be tied to Item Quality
-	*/
+	//Not technically part of the Item struct, it should be tied to Item Quality
 	Color string
 }
 
@@ -45,27 +41,27 @@ var rarityColors = map[string]string{
 	"★ Exceedingly Rare": Yellow,  // Gold
 }
 
-func writeCsv(inv []Item) {
-	var data [][]string
+// func writeCsv(inv []Item) {
+// 	var data [][]string
 
-	file, err := os.OpenFile("inventory.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	if err != nil {
-		log.Fatalln("Failed to write to file", err)
-	}
-	defer file.Close()
+// 	file, err := os.OpenFile("inventory.csv", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+// 	if err != nil {
+// 		log.Fatalln("Failed to write to file", err)
+// 	}
+// 	defer file.Close()
 
-	w := csv.NewWriter(file)
-	defer w.Flush()
+// 	w := csv.NewWriter(file)
+// 	defer w.Flush()
 
-	for _, entry := range inv {
-		convertedFloat := fmt.Sprintf("%.12f", entry.Float)
+// 	for _, entry := range inv {
+// 		convertedFloat := fmt.Sprintf("%.12f", entry.Float)
 
-		row := []string{convertedFloat, entry.Condition, entry.Rarity}
-		data = append(data, row)
-	}
+// 		row := []string{convertedFloat, entry.Condition, entry.Rarity}
+// 		data = append(data, row)
+// 	}
 
-	w.WriteAll(data)
-}
+// 	w.WriteAll(data)
+// }
 
 func main() {
 	var n, err = strconv.Atoi(os.Args[1])
@@ -116,8 +112,10 @@ func main() {
 				fmt.Printf(item.Color+"%.12f\t%s\t%s\t\n"+Reset, item.Float, item.Condition, item.Rarity)
 			}
 		}
-		if os.Args[2] == "--csv" { //TODO
-			writeCsv(inventory)
-		}
+
+		//TODO
+		// if os.Args[2] == "--csv" {
+		// 	writeCsv(inventory)
+		// }
 	}
 }
